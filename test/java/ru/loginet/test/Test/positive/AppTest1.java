@@ -25,7 +25,7 @@ public class AppTest1
     String userName = "test_cola";
     String userPassword = "542256test_cola";
 
-    LoginPage loginPage = new LoginPage();
+
     ShippingRequest shippingRequest = new ShippingRequest(customer);
     RequestUploader4Auction requestUploaderCola = new RequestUploader4Auction(customer);
     FilterShippingRequest filterShippingRequest = new FilterShippingRequest();
@@ -33,7 +33,7 @@ public class AppTest1
     @Test
     public void ColaCanUploadIntercityShippingRequest()
     {
-        loginPage.login(userName, userPassword);
+        new LoginPage(userName);
         SideMenu.openShRqwst();//Нажмет на собственные заявки, дождется загрузки грида и перейдет на него
         //shippingRequest.mnuAddRequest.click();
         //shippingRequest.btnLoad.click();
@@ -67,9 +67,9 @@ public class AppTest1
         $(By.id("ext-gen21-gp-PartnerName-ООО \"Алые Паруса\"-bd")).$(By.className("x-grid3-cell-first")).click();
         sleep(3000);
         $(By.id("MainContent_ctlContent_gplContactPersons")).$(By.className("x-grid3-scroller")).$(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker")).setSelected(true);
-        $(By.id("MainContent_ctlContent_btnSendMail"));
+        //$(By.id("MainContent_ctlContent_btnSendMail"));
         switchTo().defaultContent();
-        switchTo().frame(ShippingRequest.frame);
+        switchTo().frame(ShippingRequest.I_FRAME);
         System.out.println("Success");
         sleep(30000);
     }

@@ -1,5 +1,6 @@
 package ru.loginet.test.ojects.ShippingRequestAssigned;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.loginet.test.ojects.FilterRequest;
@@ -33,6 +34,13 @@ public class FilterShippingRequestAssigned extends FilterRequest{
 
     @Override
     public SelenideElement findLinkByRequestName(String requestName) {
+        if ($(By.linkText(requestName)).is(Condition.not(Condition.present))) {
+            reset();
+            ShippingRequestAssigned.btnFilter.click();
+            txtRequestName.setValue(requestName);
+            btnFilterApply.click();
+            sleep(3000);
+        }
         return $(By.linkText(requestName));
     }
 }

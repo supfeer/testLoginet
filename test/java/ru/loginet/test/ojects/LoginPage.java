@@ -10,10 +10,10 @@ public class LoginPage extends Selenide {
     public final static SelenideElement password= $(By.name("ctl00$MainContent$ctlContent$lgUserLogin$Password"));
     public final static SelenideElement loginBtn= $(By.name("ctl00$MainContent$ctlContent$lgUserLogin$LoginButton"));
 
-        public static void login(String userlogin,String userPassword){
+        public LoginPage(String userlogin){
         open("http://iananova.loginet.ru/account/Login.aspx");
         userName.setValue(userlogin);
-        password.setValue(userPassword);
+        password.setValue("542256" + userlogin);
         loginBtn.click();
     }
 

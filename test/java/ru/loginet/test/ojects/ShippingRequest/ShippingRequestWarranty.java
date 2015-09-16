@@ -18,7 +18,7 @@ public class ShippingRequestWarranty extends Selenide {
         btnDistribute.click();
         btnConfirmYes.click();
         switchTo().defaultContent();
-        switchTo().frame(ShippingRequest.frame);
+        switchTo().frame(ShippingRequest.I_FRAME);
     }
 }
 

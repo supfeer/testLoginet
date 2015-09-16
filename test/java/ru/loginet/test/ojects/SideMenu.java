@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.loginet.test.ojects.ShippingRequest.ShippingRequest;
+import ru.loginet.test.ojects.ShippingRequestAssigned.ShippingRequestAssigned;
 
 
 public class SideMenu extends Selenide{
@@ -36,8 +37,8 @@ public class SideMenu extends Selenide{
 
         }
         transBrkr.click();
-        shippingRqwst.click();
-        ShippingRequest.select();
+        shippingRqwstAssigned.click();
+        ShippingRequestAssigned.select();
     }
 
 }

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 
 public class ShippingRequest extends Selenide {
-    //frame
-    public final static SelenideElement frame = $(By.name("ShippingRequestList_IFrame"));
+    //I_FRAME
+    public final static SelenideElement I_FRAME = $(By.name("ShippingRequestList_IFrame"));
     //header
     public SelenideElement pnlShippingRequestList;
     public SelenideElement frmRequestsList;
@@ -66,11 +66,13 @@ public class ShippingRequest extends Selenide {
 
     public static void select()
     {
-        if(frame.is(Condition.visible))
+        if(I_FRAME.is(Condition.visible))
         {
-            switchTo().frame(frame);
-        }else
-            switchTo().window("ShippingRequestList_IFrame");
+            switchTo().frame(I_FRAME);
+        }else {
+            switchTo().defaultContent();
+            switchTo().frame(I_FRAME);
+        }
     }
     public ArrayList<SelenideElement> getWholeGrid(){
         return new ArrayList<SelenideElement>($$(By.className("x-grid3-row")));
