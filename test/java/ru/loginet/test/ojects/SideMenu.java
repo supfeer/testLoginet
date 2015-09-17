@@ -27,7 +27,7 @@ public class SideMenu extends Selenide{
 
         }
         transBrkr.click();
-        shippingRqwstAssigned.click();
+        shippingRqwst.click();
         ShippingRequest.select();
     }
     public static void openShRqwstAssigned(){

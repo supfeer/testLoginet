@@ -27,7 +27,7 @@ public class AppTest1
 
 
     ShippingRequest shippingRequest = new ShippingRequest(customer);
-    RequestUploader4Auction requestUploaderCola = new RequestUploader4Auction(customer);
+
     FilterShippingRequest filterShippingRequest = new FilterShippingRequest();
 
     @Test
@@ -35,9 +35,9 @@ public class AppTest1
     {
         new LoginPage(userName);
         SideMenu.openShRqwst();//Нажмет на собственные заявки, дождется загрузки грида и перейдет на него
-        //shippingRequest.mnuAddRequest.click();
-        //shippingRequest.btnLoad.click();
-        //requestUploaderCola.UploadOneShippingRequest(template);
+        shippingRequest.mnuAddRequest.click();
+        shippingRequest.btnLoad.click();
+        shippingRequest.requestUploader.UploadOneShippingRequest(template);
     }
     @Test(dependsOnMethods = {"ColaCanUploadIntercityShippingRequest"})
 
@@ -57,10 +57,10 @@ public class AppTest1
     @Test(dependsOnMethods = {"colaCanDistributeByWarr"})
 
     public void colaCanDistributeOnPartner(){
-        shippingRequest.getFirstChkrOnGrid().setSelected(true);
+        //shippingRequest.getFirstChkrOnGrid().setSelected(true);
         shippingRequest.btnDistributeMenu.click();
         shippingRequest.mniDistribute.click();
-
+        sleep(30000);
         switchTo().defaultContent();
         switchTo().frame(ShippingRequestDistribute.iFrame);
         $(By.id("ext-gen21-gp-PartnerName-ООО \"Алые Паруса\"-bd")).waitUntil(Condition.not(Condition.present), 30000);

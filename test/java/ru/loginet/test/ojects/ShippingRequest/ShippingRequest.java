@@ -42,6 +42,9 @@ public class ShippingRequest extends Selenide {
     public SelenideElement btnSAP;
     //x-grid
     public final static SelenideElement firstCheker = $(By.className("x-grid3-row-checker"));
+    public RequestUploader requestUploader;
+    public FilterShippingRequest filterShippingRequest;
+
     public ShippingRequest(String customer)
     {
         mnuAddRequest = $(By.id("MainContent_ctlContent_mnuAddRequest"));
@@ -62,6 +65,8 @@ public class ShippingRequest extends Selenide {
         btnDistributeMenu = $(By.id("MainContent_ctlContent_btnDistributeMenu"));
         mniWarr = $(By.id("x-menu-el-MainContent_ctlContent_mniWarr"));
         mniDistribute = $(By.id("MainContent_ctlContent_mniDistribute"));
+        requestUploader = new RequestUploader(customer);
+        filterShippingRequest = new FilterShippingRequest();
     }
 
     public static void select()
@@ -80,5 +85,7 @@ public class ShippingRequest extends Selenide {
     public SelenideElement getFirstChkrOnGrid(){
         return $(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker"));
     }
-
+    public SelenideElement chkrOfRequest(String requestName){
+        return filterShippingRequest.findLinkByRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker"));
+    }
 }
