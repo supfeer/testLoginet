@@ -67,7 +67,7 @@ public class AppTest1
         $(By.id("ext-gen21-gp-PartnerName-ООО \"Алые Паруса\"-bd")).$(By.className("x-grid3-cell-first")).click();
         sleep(3000);
         $(By.id("MainContent_ctlContent_gplContactPersons")).$(By.className("x-grid3-scroller")).$(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker")).setSelected(true);
-        //$(By.id("MainContent_ctlContent_btnSendMail"));
+        $(By.id("MainContent_ctlContent_btnSendMail"));
         switchTo().defaultContent();
         switchTo().frame(ShippingRequest.I_FRAME);
         System.out.println("Success");

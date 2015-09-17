@@ -38,15 +38,25 @@ public abstract class FilterRequest extends Selenide{
 
     public SelenideElement findLinkByRequestName(String requestName)
     {
+        sleep(2000);
         if ($(By.linkText(requestName)).is(Condition.not(Condition.present))) {
             reset();
+        }
+        if ($(By.linkText(requestName)).is(Condition.not(Condition.present))) {
             ShippingRequest.btnFilter.click();
             txtRequestName.setValue(requestName);
             btnFilterApply.click();
         }
+
         return $(By.linkText(requestName));
     }
 
+    public void setStatus(String status){
+        ShippingRequest.btnFilter.click();
+        cmbStatus.click();
+        $(By.className("x-combo-list-inner")).find(status).click();
+
+    }
 
     public String idBuilder(String name){
         return prefix + name;
