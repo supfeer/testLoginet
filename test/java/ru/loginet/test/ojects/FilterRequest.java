@@ -1,6 +1,7 @@
 package ru.loginet.test.ojects;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -54,8 +55,11 @@ public abstract class FilterRequest extends Selenide{
     public void setStatus(String status){
         ShippingRequest.btnFilter.click();
         cmbStatus.click();
-        $(By.className("x-combo-list-inner")).find(status).click();
-
+        for (SelenideElement el:$(By.className("x-combo-list-inner")).$$(By.className("x-mcombo-text"))){
+            if (el.getText().contains(status))
+                el.setSelected(true);
+        }
+        btnFilterApply.click();
     }
 
     public String idBuilder(String name){
