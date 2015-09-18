@@ -29,8 +29,6 @@ public class FilterShippingRequest extends FilterRequest {
 
 
     public void setOd(String od) {
-        reset();
-        ShippingRequest.btnFilter.click();
         txtOD.setValue(od);
         btnFilterApply.click();
         sleep(3000);

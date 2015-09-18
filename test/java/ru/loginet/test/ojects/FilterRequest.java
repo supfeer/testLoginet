@@ -32,7 +32,6 @@ public abstract class FilterRequest extends Selenide{
 
 
     public void reset() {
-        ShippingRequest.btnFilter.click();
         btnFilterReset.click();
         sleep(3000);
     }
@@ -44,7 +43,7 @@ public abstract class FilterRequest extends Selenide{
             reset();
         }
         if ($(By.linkText(requestName)).is(Condition.not(Condition.present))) {
-            ShippingRequest.btnFilter.click();
+
             txtRequestName.setValue(requestName);
             btnFilterApply.click();
         }
@@ -52,17 +51,33 @@ public abstract class FilterRequest extends Selenide{
         return $(By.linkText(requestName));
     }
 
-    public void setStatus(String status){
-        ShippingRequest.btnFilter.click();
+    public void setStatus(String state){
         cmbStatus.click();
         for (SelenideElement el:$(By.className("x-combo-list-inner")).$$(By.className("x-mcombo-text"))){
-            if (el.getText().contains(status))
+            if (el.getText().contains(state))
                 el.setSelected(true);
         }
+
         btnFilterApply.click();
     }
 
     public String idBuilder(String name){
         return prefix + name;
     }
+    public void setDateLoad(String dateLoad){
+        dtpDateFrom.setValue(dateLoad);
+        dtpDateTo.setValue(dateLoad);
+        btnFilterApply.click();
+    }
+    public void setDateNState(String dateLoad,String state){
+        cmbStatus.click();
+        for (SelenideElement el:$(By.className("x-combo-list-inner")).$$(By.className("x-mcombo-text"))){
+            if (el.getText().contains(state))
+                el.setSelected(true);
+        }
+        dtpDateFrom.setValue(dateLoad);
+        dtpDateTo.setValue(dateLoad);
+        btnFilterApply.click();
+    }
+
 }

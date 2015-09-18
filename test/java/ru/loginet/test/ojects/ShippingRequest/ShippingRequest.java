@@ -37,7 +37,7 @@ public class ShippingRequest extends Selenide {
     public SelenideElement mnuViewProcess;//менюшка исполнение
     public SelenideElement btnQualityFeedback;
     public SelenideElement btnReports;
-    public final static SelenideElement btnFilter = $(By.id("MainContent_ctlContent_btnFilter"));
+    public SelenideElement btnFilter;
     public SelenideElement btnDownloadDocs;
     public SelenideElement btnSAP;
     //x-grid
@@ -65,6 +65,7 @@ public class ShippingRequest extends Selenide {
         btnDistributeMenu = $(By.id("MainContent_ctlContent_btnDistributeMenu"));
         mniWarr = $(By.id("x-menu-el-MainContent_ctlContent_mniWarr"));
         mniDistribute = $(By.id("MainContent_ctlContent_mniDistribute"));
+        btnFilter = $(By.id("MainContent_ctlContent_btnFilter"));
         requestUploader = new RequestUploader(customer);
         filterShippingRequest = new FilterShippingRequest();
     }
@@ -87,5 +88,18 @@ public class ShippingRequest extends Selenide {
     }
     public SelenideElement chkrOfRequest(String requestName){
         return filterShippingRequest.findLinkByRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker"));
+    }
+
+
+
+    //Filter
+    public void filterReset(){
+
+        btnFilter.click();
+        filterShippingRequest.reset();
+    }
+    public void filterSetDateLoad(String dateLoad){
+        btnFilter.click();
+        filterShippingRequest.setDateLoad(dateLoad);
     }
 }

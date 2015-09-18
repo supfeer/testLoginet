@@ -14,11 +14,12 @@ public class ShippingRequestWarranty extends Selenide {
     public static void distribute(){
         switchTo().defaultContent();
         switchTo().frame("ShippingRequestWarranty_IFrame");
-        btnDistribute.waitUntil(Condition.not(Condition.visible),30000);
+        btnDistribute.waitUntil(Condition.not(Condition.visible), 30000);
         btnDistribute.click();
         btnConfirmYes.click();
         switchTo().defaultContent();
-        switchTo().frame(ShippingRequest.I_FRAME);
+        ShippingRequest.I_FRAME.waitUntil(Condition.not(Condition.visible),30000);
+        $(By.id("MainContent_ctlContent_frmRequestsList")).waitUntil(Condition.not(Condition.visible), 30000);
     }
 }
 

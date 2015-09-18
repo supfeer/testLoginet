@@ -8,10 +8,6 @@ import ru.loginet.test.ojects.Dater;
 public class Date {
     @Test
     public void showDate(){
-        try {
-            ParserShippingRequestCola.setDateLoadUnload(Dater.getNow(),Dater.getTomorrow());
-        } catch (Exception e) {
-            System.err.print("Отстой");
-        }
+        System.out.println(Dater.getUnique());
     }
 }

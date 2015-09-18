@@ -46,8 +46,9 @@ public class ShippingRequestDistribute extends Selenide {
         select();
         findPartner(partner);
         //Выберем первый чекбокс внизу
+        sleep(3000);
         $(By.id("MainContent_ctlContent_gplContactPersons")).$(By.className("x-grid3-scroller")).$(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker")).setSelected(true);
-        btnCancel.click();
+        btnDistribute.click();
         switchTo().defaultContent();
         switchTo().frame(ShippingRequest.I_FRAME);
     }

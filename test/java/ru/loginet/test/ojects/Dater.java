@@ -1,6 +1,7 @@
 package ru.loginet.test.ojects;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Dater {
 
-    public static String getNow(){
+    public static String getToday(){
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d.MM.YYYY");
         return dateTimeFormatter.format(localDate);
@@ -36,6 +37,11 @@ public class Dater {
         LocalDate localDate = LocalDate.now();
         localDate = localDate.plusDays(days);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d.MM.YYYY");
+        return dateTimeFormatter.format(localDate);
+    }
+    public static String getUnique(){
+        LocalDateTime localDate = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMeeHHmm");
         return dateTimeFormatter.format(localDate);
     }
 }

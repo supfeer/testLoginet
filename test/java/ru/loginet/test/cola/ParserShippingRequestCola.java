@@ -8,6 +8,7 @@ import ru.loginet.test.ojects.Dater;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ParserShippingRequestCola
 {
@@ -30,7 +31,7 @@ public class ParserShippingRequestCola
     public static int clmncomment = 17;               //   S
     public static int clmnprice = 18;                 //   T
 
-    public ShippingRequestValueContainerCola parseToContainer()
+    public static ShippingRequestValueContainerCola parseToContainer()
     {
         try
         {
@@ -50,8 +51,10 @@ public class ParserShippingRequestCola
             System.out.println(containerCola.getTimeLoad());
             containerCola.setStoreToLoad(row1.getCell(clmnstoreToLoad).getRichStringCellValue().getString());
             System.out.println(containerCola.getStoreToLoad());
+
             containerCola.setDateUnload(row1.getCell(clmndateUnload).getRichStringCellValue().getString());
             System.out.println(containerCola.getDateUnload());
+
             containerCola.setTimeUnload(row1.getCell(clmntimeUnload).getRichStringCellValue().getString());
             System.out.println(containerCola.getTimeUnload());
             containerCola.setStoreUnload(row1.getCell(clmnstoreUnload).getRichStringCellValue().getString());
@@ -87,12 +90,55 @@ public class ParserShippingRequestCola
         }
     }
     public static void setDateLoadUnload(String dateLoad, String dateUnload)throws Exception{
-        POIFSFileSystem fs      =
+        try {
+            POIFSFileSystem fs      =
+                    new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            Sheet sheet1 = wb.getSheetAt(0);
+            Row row1 = sheet1.getRow(start);
+            row1.getCell(clmndateLoad).setCellValue(dateLoad);
+            row1.getCell(clmndateUnload).setCellValue(dateUnload);
+            wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
+        } catch (IOException e) {
+            System.out.println("setDateLoadUnload");
+        }
+    }
+    public static void setDateLoad(String dateLoad)throws Exception{
+        try {
+            POIFSFileSystem fs      =
+                    new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            Sheet sheet1 = wb.getSheetAt(0);
+            Row row1 = sheet1.getRow(start);
+            row1.getCell(clmndateLoad).setCellValue(dateLoad);
+            wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
+        } catch (IOException e) {
+            System.out.println("setDateLoad");
+        }
+    }
+    public static void setDateUnload(String dateUnload)throws Exception{
+        try {
+            POIFSFileSystem fs      =
+                    new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            Sheet sheet1 = wb.getSheetAt(0);
+            Row row1 = sheet1.getRow(start);
+            row1.getCell(clmndateUnload).setCellValue(dateUnload);
+            wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
+        } catch (IOException e) {
+            System.out.println("ParserShippingRequestCola - setDateUnload error");
+        }
+    }
+
+    public static String setOd() throws Exception {
+        String od = Dater.getUnique();
+        POIFSFileSystem fs =
                 new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
         HSSFWorkbook wb = new HSSFWorkbook(fs);
         Sheet sheet1 = wb.getSheetAt(0);
         Row row1 = sheet1.getRow(start);
-        row1.getCell(clmndateLoad).setCellValue(Dater.getNow());
+        row1.getCell(clmnod).setCellValue(od);
         wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
+        return od;
     }
 }
