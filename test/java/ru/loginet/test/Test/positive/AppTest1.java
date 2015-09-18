@@ -42,8 +42,8 @@ public class AppTest1
     @Test(dependsOnMethods = {"ColaCanUploadIntercityShippingRequest"})
 
     public void ColaCanFindByOd() {
-        //filterShippingRequest.setOd(containerCola.getOD());
-        //System.out.println("ColaCanFindByOd");
+        filterShippingRequest.setOd(containerCola.getOD());
+        System.out.println("ColaCanFindByOd");
     }
 
     @Test(dependsOnMethods = { "ColaCanFindByOd" })

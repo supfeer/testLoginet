@@ -27,17 +27,19 @@ public class ShippingRequestDistribute extends Selenide {
             switchTo().defaultContent();
             switchTo().frame(iFrame);
         }
-        $(By.className("x-grid3-scroller")).$(By.className("x-grid3-body")).$(By.className("x-grid3-row-first")).waitUntil(Condition.not(Condition.appear), 30000);
-        //arrow.waitUntil(Condition.not(Condition.present),15000);
+        //дождаться пока браузер отрисует страницу
+        sleep(2000);
     }
     public void findPartner(String partner){
         sleep(1000);
-        $(By.id("MainContent_ctlContent_ctl00_Container")).$(By.tagName("thead")).$(By.className("x-grid3-cell-first")).hover();//наведет мышку на ячейку Партнер, появится стрелочка
+        //наведет мышку на ячейку Партнер, появится стрелочка
+        $(By.id("MainContent_ctlContent_ctl00_Container")).$(By.tagName("thead")).$(By.className("x-grid3-cell-first")).hover();
         arrow.click();
         filter.hover();
         input.setValue(partner);
         input.pressEnter();
-        $(By.id("ext-gen21-gp-PartnerName-" + partner + "-bd")).$(By.className("x-grid3-cell-first")).click();//найдет выбранного партнера в гриде и нажмет на него
+        //найдет выбранного партнера в гриде и нажмет на него
+        $(By.id("ext-gen21-gp-PartnerName-" + partner + "-bd")).$(By.className("x-grid3-cell-first")).click();
 
     }
     public void distiributeRequestOnPartner (String partner){
@@ -48,7 +50,5 @@ public class ShippingRequestDistribute extends Selenide {
         btnCancel.click();
         switchTo().defaultContent();
         switchTo().frame(ShippingRequest.I_FRAME);
-
-        sleep(30000);
     }
 }

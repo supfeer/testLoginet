@@ -29,7 +29,7 @@ public class FilterShippingRequestAssigned extends FilterRequest{
     public void reset() {
         ShippingRequestAssigned.btnFilter.click();
         btnFilterReset.click();
-        sleep(3000);
+        sleep(2000);
     }
 
     @Override
