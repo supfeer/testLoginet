@@ -1,4 +1,4 @@
-package ru.loginet.test.Test.positive;
+package ru.loginet.test.Test.sandBox;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
