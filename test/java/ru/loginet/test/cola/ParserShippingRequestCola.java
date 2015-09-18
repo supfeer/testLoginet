@@ -4,8 +4,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import ru.loginet.test.ojects.Dater;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class ParserShippingRequestCola
 {
@@ -40,8 +42,10 @@ public class ParserShippingRequestCola
             Row row1 = sheet1.getRow(start);
             containerCola.setOd(row1.getCell(clmnod).getRichStringCellValue().getString());
             System.out.println(containerCola.getOD());
+
             containerCola.setDateLoad(row1.getCell(clmndateLoad).getRichStringCellValue().getString());
             System.out.println(containerCola.getDateLoad());
+
             containerCola.setTimeLoad(row1.getCell(clmntimeLoad).getRichStringCellValue().getString());
             System.out.println(containerCola.getTimeLoad());
             containerCola.setStoreToLoad(row1.getCell(clmnstoreToLoad).getRichStringCellValue().getString());
@@ -81,5 +85,14 @@ public class ParserShippingRequestCola
             System.out.println("Parsing error");
             return new ShippingRequestValueContainerCola();
         }
+    }
+    public static void setDateLoadUnload(String dateLoad, String dateUnload)throws Exception{
+        POIFSFileSystem fs      =
+                new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
+        HSSFWorkbook wb = new HSSFWorkbook(fs);
+        Sheet sheet1 = wb.getSheetAt(0);
+        Row row1 = sheet1.getRow(start);
+        row1.getCell(clmndateLoad).setCellValue(Dater.getNow());
+        wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
     }
 }

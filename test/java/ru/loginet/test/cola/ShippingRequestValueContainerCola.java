@@ -2,7 +2,7 @@ package ru.loginet.test.cola;
 
 
 public class ShippingRequestValueContainerCola {
-    private String file_path = "src/test/testFiles/ColaValid1.xls";
+    static String file_path = "src/test/testFiles/ColaValid1.xls";
     private String od;                   //   c
     private String dateLoad;              //   D
     private String timeLoad;              //   E
