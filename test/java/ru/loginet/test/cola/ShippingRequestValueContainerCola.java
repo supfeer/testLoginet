@@ -2,24 +2,55 @@ package ru.loginet.test.cola;
 
 
 public class ShippingRequestValueContainerCola {
-    static String file_path = "src/test/testFiles/ColaValid1.xls";
+    public static String file_path = "src/test/testFiles/ColaValid1.xls";
     private String od;                   //   c
-    private String dateLoad;              //   D
-    private String timeLoad;              //   E
-    private String storeToLoad;           //   F
+    private String requestDate;              //   D
+    private String requestTime;              //   E
+    private String loadStoreCode;           //   F
     private String dateUnload;            //   G
     private String timeUnload;            //   F
-    private String storeUnload;           //   I
-    private String serviceType;           //   J
+    private String unloadStoreCode;           //   I
+    private String requestService;           //   J
     private String vehicleType;           //   K
     private String bodySpace;             //   L
     private String load;                  //   M
     private String weight;                //   N
     private String tripTypes;             //   O
     private String region;                //   P
-    private String cost;                  //   R
+    private String requestTotalCargoCost;                  //   R
     private String comment;               //   S
     private String price;                 //   T
+
+    private String adressLoad;
+    private String adressUnload;
+
+    public String getRequestName() {
+        return requestName;
+    }
+
+    public void setRequestName(String requestName) {
+        this.requestName = requestName;
+    }
+
+    private String requestName;
+
+
+    public String getAdressUnload() {
+        return adressUnload;
+    }
+
+    public void setAdressUnload(String adressUnload) {
+        this.adressUnload = adressUnload;
+    }
+
+
+    public String getAdressLoad() {
+        return adressLoad;
+    }
+
+    public void setAdressLoad(String adressLoad) {
+        this.adressLoad = adressLoad;
+    }
 
     public String getFile_path() {
         return file_path;
@@ -33,28 +64,28 @@ public class ShippingRequestValueContainerCola {
         return od;
     }
 
-    public void setDateLoad(String dateLoad) {
-        this.dateLoad = dateLoad;
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate;
     }
 
-    public String getDateLoad() {
-        return dateLoad;
+    public String getRequestDate() {
+        return requestDate;
     }
 
-    public void setTimeLoad(String timeLoad) {
-        this.timeLoad = timeLoad;
+    public void setRequestTime(String requestTime) {
+        this.requestTime = requestTime;
     }
 
-    public String getTimeLoad() {
-        return timeLoad;
+    public String getRequestTime() {
+        return requestTime;
     }
 
-    public void setStoreToLoad(String storeToLoad) {
-        this.storeToLoad = storeToLoad;
+    public void setLoadStoreCode(String loadStoreCode) {
+        this.loadStoreCode = loadStoreCode;
     }
 
-    public String getStoreToLoad() {
-        return storeToLoad;
+    public String getLoadStoreCode() {
+        return loadStoreCode;
     }
 
     public void setDateUnload(String dateUnload) {
@@ -73,20 +104,20 @@ public class ShippingRequestValueContainerCola {
         return timeUnload;
     }
 
-    public void setStoreUnload(String storeUnload) {
-        this.storeUnload = storeUnload;
+    public void setUnloadStoreCode(String unloadStoreCode) {
+        this.unloadStoreCode = unloadStoreCode;
     }
 
-    public String getStoreUnload() {
-        return storeUnload;
+    public String getUnloadStoreCode() {
+        return unloadStoreCode;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setRequestService(String requestService) {
+        this.requestService = requestService;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public String getRequestService() {
+        return requestService;
     }
 
     public void setVehicleType(String vehicleType) {
@@ -145,12 +176,12 @@ public class ShippingRequestValueContainerCola {
         return comment;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
+    public void setRequestTotalCargoCost(String requestTotalCargoCost) {
+        this.requestTotalCargoCost = requestTotalCargoCost;
     }
 
-    public String getCost() {
-        return cost;
+    public String getRequestTotalCargoCost() {
+        return requestTotalCargoCost;
     }
 
     public void setPrice(String price) {

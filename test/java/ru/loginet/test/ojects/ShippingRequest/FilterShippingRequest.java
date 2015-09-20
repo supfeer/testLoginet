@@ -1,7 +1,5 @@
 package ru.loginet.test.ojects.ShippingRequest;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.loginet.test.ojects.FilterRequest;
 
@@ -30,10 +28,5 @@ public class FilterShippingRequest extends FilterRequest {
 
     public void setOd(String od) {
         txtOD.setValue(od);
-        btnFilterApply.click();
-        sleep(3000);
-        $(By.className("x-grid3-row-first")).$(By.className("x-grid3-col-OD")).shouldHave(Condition.text(od));//проверит первую линию и посмотрит в ней од
-
-
     }
 }

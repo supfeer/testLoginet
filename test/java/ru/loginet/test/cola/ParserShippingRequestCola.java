@@ -2,6 +2,7 @@ package ru.loginet.test.cola;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import ru.loginet.test.ojects.Dater;
@@ -9,9 +10,9 @@ import ru.loginet.test.ojects.Dater;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 
-public class ParserShippingRequestCola
-{
+public class ParserShippingRequestCola {
     public static int start = 2;                     //   line to start
     public static int clmnod = 2;                   //   c
     public static int clmndateLoad = 3;              //   D
@@ -31,67 +32,86 @@ public class ParserShippingRequestCola
     public static int clmncomment = 17;               //   S
     public static int clmnprice = 18;                 //   T
 
-    public static ShippingRequestValueContainerCola parseToContainer()
-    {
-        try
-        {
-            ShippingRequestValueContainerCola containerCola = new ShippingRequestValueContainerCola();
-            POIFSFileSystem fs      =
-                    new POIFSFileSystem(new FileInputStream(containerCola.getFile_path()));
-            HSSFWorkbook wb = new HSSFWorkbook(fs);
-            Sheet sheet1 = wb.getSheetAt(0);
-            Row row1 = sheet1.getRow(start);
-            containerCola.setOd(row1.getCell(clmnod).getRichStringCellValue().getString());
-            System.out.println(containerCola.getOD());
+    public static ShippingRequestValueContainerCola parseToContainer() throws Exception {
+        ShippingRequestValueContainerCola containerCola = new ShippingRequestValueContainerCola();
+        POIFSFileSystem fs =
+                new POIFSFileSystem(new FileInputStream(containerCola.getFile_path()));
+        HSSFWorkbook wb = new HSSFWorkbook(fs);
+        Sheet sheet1 = wb.getSheetAt(0);
+        Row row1 = sheet1.getRow(start);
 
-            containerCola.setDateLoad(row1.getCell(clmndateLoad).getRichStringCellValue().getString());
-            System.out.println(containerCola.getDateLoad());
 
-            containerCola.setTimeLoad(row1.getCell(clmntimeLoad).getRichStringCellValue().getString());
-            System.out.println(containerCola.getTimeLoad());
-            containerCola.setStoreToLoad(row1.getCell(clmnstoreToLoad).getRichStringCellValue().getString());
-            System.out.println(containerCola.getStoreToLoad());
+        containerCola.setOd(row1.getCell(clmnod).getRichStringCellValue().getString());
+        System.out.println(containerCola.getOD());
 
-            containerCola.setDateUnload(row1.getCell(clmndateUnload).getRichStringCellValue().getString());
-            System.out.println(containerCola.getDateUnload());
+        containerCola.setRequestDate(row1.getCell(clmndateLoad).getRichStringCellValue().getString());
+        System.out.println(containerCola.getRequestDate());
 
-            containerCola.setTimeUnload(row1.getCell(clmntimeUnload).getRichStringCellValue().getString());
-            System.out.println(containerCola.getTimeUnload());
-            containerCola.setStoreUnload(row1.getCell(clmnstoreUnload).getRichStringCellValue().getString());
-            System.out.println(containerCola.getStoreUnload());
-            containerCola.setServiceType(row1.getCell(clmnserviceType).getRichStringCellValue().getString());
-            System.out.println(containerCola.getServiceType());
-            containerCola.setVehicleType(row1.getCell(clmnvehicleType).getRichStringCellValue().getString());
-            System.out.println(containerCola.getVehicleType());
-            containerCola.setBodySpace(row1.getCell(clmnbodySpace).getRichStringCellValue().getString());
-            System.out.println(containerCola.getBodySpace());
-            //containerCola.setLoad(row1.getCell(clmnload).getRichStringCellValue().getString());
-            //System.out.println(containerCola.getLoad());
-            //containerCola.setWeight(row1.getCell(clmnweight).getRichStringCellValue().getString());
-            //System.out.println(containerCola.getWeight());
-            //containerCola.setTripTypes(row1.getCell(clmntripTypes).getRichStringCellValue().getString());
-            //System.out.println(containerCola.getTripTypes());
-            //containerCola.setRegion(row1.getCell(clmnregion).getRichStringCellValue().getString());
-            //System.out.println(containerCola.getRegion());
-            //containerCola.setCost(row1.getCell(clmncost).getRichStringCellValue().getString());
-            //System.out.println(containerCola.getCost());
-            //containerCola.setComment(row1.getCell(clmncomment).getRichStringCellValue().getString());
-            //System.out.println(containerCola.getComment());
-            //containerCola.setPrice(row1.getCell(clmnprice).getRichStringCellValue().getString());
-            //System.out.println("fin");
+        containerCola.setRequestTime(row1.getCell(clmntimeLoad).getRichStringCellValue().getString());
+        System.out.println(containerCola.getRequestTime());
 
-            return containerCola;
+        containerCola.setLoadStoreCode(row1.getCell(clmnstoreToLoad).getRichStringCellValue().getString());
+        String codeLoad = containerCola.getLoadStoreCode();
+        System.out.println(containerCola.getLoadStoreCode());
+
+        containerCola.setDateUnload(row1.getCell(clmndateUnload).getRichStringCellValue().getString());
+        System.out.println(containerCola.getDateUnload());
+
+        containerCola.setTimeUnload(row1.getCell(clmntimeUnload).getRichStringCellValue().getString());
+        System.out.println(containerCola.getTimeUnload());
+
+        containerCola.setUnloadStoreCode(row1.getCell(clmnstoreUnload).getRichStringCellValue().getString());
+        String codeUnload = containerCola.getUnloadStoreCode();
+        System.out.println(containerCola.getUnloadStoreCode());
+
+        containerCola.setRequestService(row1.getCell(clmnserviceType).getRichStringCellValue().getString());
+        System.out.println(containerCola.getRequestService());
+        containerCola.setVehicleType(row1.getCell(clmnvehicleType).getRichStringCellValue().getString());
+        System.out.println(containerCola.getVehicleType());
+        containerCola.setBodySpace(row1.getCell(clmnbodySpace).getRichStringCellValue().getString());
+        System.out.println(containerCola.getBodySpace());
+        containerCola.setLoad(row1.getCell(clmnload).getRichStringCellValue().getString());
+        System.out.println(containerCola.getLoad());
+        containerCola.setWeight(row1.getCell(clmnweight).getRichStringCellValue().getString());
+        System.out.println(containerCola.getWeight());
+        containerCola.setTripTypes(row1.getCell(clmntripTypes).getRichStringCellValue().getString());
+        System.out.println(containerCola.getTripTypes());
+        containerCola.setRegion(row1.getCell(clmnregion).getRichStringCellValue().getString());
+        System.out.println(containerCola.getRegion());
+        containerCola.setRequestTotalCargoCost(row1.getCell(clmncost).getRichStringCellValue().getString());
+        System.out.println(containerCola.getRequestTotalCargoCost());
+        containerCola.setComment(row1.getCell(clmncomment).getRichStringCellValue().getString());
+        System.out.println(containerCola.getComment());
+        containerCola.setPrice(row1.getCell(clmnprice).getRichStringCellValue().getString());
+
+
+        Sheet sheet = wb.getSheetAt(1);
+        Iterator<Row> it = sheet.iterator();
+
+        while (it.hasNext()) {
+            Row row = it.next();
+            Cell code = row.getCell(0);
+            Cell value1 = row.getCell(1);
+            if (code.getRichStringCellValue().getString().equals(codeLoad)) {
+                containerCola.setAdressLoad(value1.getRichStringCellValue().getString());
+            }
+            if (code.getRichStringCellValue().getString().equals(codeUnload)) {
+                containerCola.setAdressUnload(value1.getRichStringCellValue().getString());
+            }
 
         }
-        catch (Exception e)
-        {
-            System.out.println("Parsing error");
-            return new ShippingRequestValueContainerCola();
-        }
+        System.out.println("Adress load " + containerCola.getAdressLoad());
+        System.out.println("Adress Unload " + containerCola.getAdressUnload());
+        System.out.println("fin");
+
+        return containerCola;
+
+
     }
-    public static void setDateLoadUnload(String dateLoad, String dateUnload)throws Exception{
+
+    public static void setDateLoadUnload(String dateLoad, String dateUnload) throws Exception {
         try {
-            POIFSFileSystem fs      =
+            POIFSFileSystem fs =
                     new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             Sheet sheet1 = wb.getSheetAt(0);
@@ -103,9 +123,10 @@ public class ParserShippingRequestCola
             System.out.println("setDateLoadUnload");
         }
     }
-    public static void setDateLoad(String dateLoad)throws Exception{
+
+    public static void setDateLoad(String dateLoad) throws Exception {
         try {
-            POIFSFileSystem fs      =
+            POIFSFileSystem fs =
                     new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             Sheet sheet1 = wb.getSheetAt(0);
@@ -113,12 +134,13 @@ public class ParserShippingRequestCola
             row1.getCell(clmndateLoad).setCellValue(dateLoad);
             wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
         } catch (IOException e) {
-            System.out.println("setDateLoad");
+            System.out.println("setRequestDate");
         }
     }
-    public static void setDateUnload(String dateUnload)throws Exception{
+
+    public static void setDateUnload(String dateUnload) throws Exception {
         try {
-            POIFSFileSystem fs      =
+            POIFSFileSystem fs =
                     new POIFSFileSystem(new FileInputStream(ShippingRequestValueContainerCola.file_path));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             Sheet sheet1 = wb.getSheetAt(0);
@@ -138,7 +160,9 @@ public class ParserShippingRequestCola
         Sheet sheet1 = wb.getSheetAt(0);
         Row row1 = sheet1.getRow(start);
         row1.getCell(clmnod).setCellValue(od);
+        row1.getCell(clmncomment).setCellValue(od);
         wb.write(new FileOutputStream(ShippingRequestValueContainerCola.file_path));
         return od;
     }
+
 }

@@ -21,24 +21,26 @@ public class SideMenu extends Selenide{
 
 
     public static void openShRqwst(){
-
-        if (transBrkr.is(Condition.not(Condition.present))){
-            refresh();
+        switchTo().defaultContent();
+        if ($(By.id("BaseMainContent_MainTabPanel__ShippingRequestList")).$(By.className("x-tab-strip-close")).is(Condition.present))
+            $(By.id("BaseMainContent_MainTabPanel__ShippingRequestList")).$(By.className("x-tab-strip-close")).click();
+        if (transBrkr.is(Condition.present)) {
+            transBrkr.click();
 
         }
-        transBrkr.click();
         shippingRqwst.click();
         ShippingRequest.select();
+        //sleep(2000);
+        $(By.className("x-grid3-hd-checker-on")).waitUntil(Condition.not(Condition.present), 30000);
     }
     public static void openShRqwstAssigned(){
-
-        if (transBrkr.is(Condition.not(Condition.present))){
-            refresh();
-
+        switchTo().defaultContent();
+        if (transBrkr.is(Condition.present)) {
+            transBrkr.click();
         }
-        transBrkr.click();
         shippingRqwstAssigned.click();
         ShippingRequestAssigned.select();
+        $(By.className("x-grid3-hd-checker-on")).waitUntil(Condition.not(Condition.present), 30000);
     }
 
 }

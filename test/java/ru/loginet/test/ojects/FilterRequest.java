@@ -1,11 +1,9 @@
 package ru.loginet.test.ojects;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import ru.loginet.test.ojects.ShippingRequest.ShippingRequest;
 
 /**
  * Created by supfe_000 on 10.09.2015.
@@ -51,14 +49,13 @@ public abstract class FilterRequest extends Selenide{
         return $(By.linkText(requestName));
     }
 
-    public void setStatus(String state){
+    public void setState(String state) {
         cmbStatus.click();
         for (SelenideElement el:$(By.className("x-combo-list-inner")).$$(By.className("x-mcombo-text"))){
             if (el.getText().contains(state))
                 el.setSelected(true);
         }
 
-        btnFilterApply.click();
     }
 
     public String idBuilder(String name){
@@ -67,7 +64,15 @@ public abstract class FilterRequest extends Selenide{
     public void setDateLoad(String dateLoad){
         dtpDateFrom.setValue(dateLoad);
         dtpDateTo.setValue(dateLoad);
-        btnFilterApply.click();
+        //btnFilterApply.click();
+    }
+
+    public void setDateLoadFrom(String dateLoad) {
+        dtpDateFrom.setValue(dateLoad);
+    }
+
+    public void setDateLoadTo(String dateLoad) {
+        dtpDateTo.setValue(dateLoad);
     }
     public void setDateNState(String dateLoad,String state){
         cmbStatus.click();
@@ -77,7 +82,15 @@ public abstract class FilterRequest extends Selenide{
         }
         dtpDateFrom.setValue(dateLoad);
         dtpDateTo.setValue(dateLoad);
+    }
+
+    public void setRequestName(String requestName) {
+        txtRequestName.setValue(requestName);
+    }
+
+    public void apply() {
         btnFilterApply.click();
+        sleep(2000);
     }
 
 }

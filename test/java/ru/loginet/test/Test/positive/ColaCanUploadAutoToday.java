@@ -1,6 +1,5 @@
 package ru.loginet.test.Test.positive;
 
-
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -14,10 +13,11 @@ import java.io.File;
 
 import static com.codeborne.selenide.Selenide.$;
 
+/**
+ * Created by supfe_000 on 20.09.2015.
+ */
+public class ColaCanUploadAutoToday {
 
-public class ColaCanUploadAuto
-
-{
     ShippingRequestValueContainerCola containerCola = new ShippingRequestValueContainerCola();
     File template = new File(containerCola.getFile_path());
     String customer = "cola";
@@ -27,10 +27,11 @@ public class ColaCanUploadAuto
     @Test
     public void ColaCanUploadIntercityShippingRequest() throws Exception {
 
+
         SideMenu.openShRqwst();
         try {
             ParserShippingRequestCola.setOd();
-            ParserShippingRequestCola.setDateLoad(Dater.getTomorrow());
+            ParserShippingRequestCola.setDateLoad(Dater.getToday());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,6 +54,8 @@ public class ColaCanUploadAuto
 
     @Test(dependsOnMethods = {"findRequest"})
     public void checkGrid() {
+        //shippingRequest.firstRow("x-grid3-col-Options").should(Condition.attribute("img"));
+        // shippingRequest.firstRow("x-grid3-col-Options").shouldHave();
         shippingRequest.firstRow("x-grid3-col-RequestDate").shouldHave(Condition.text(containerCola.getRequestDate()));
         shippingRequest.firstRow("x-grid3-col-RequestTime").shouldHave(Condition.text(containerCola.getRequestTime()));
         shippingRequest.firstRow("x-grid3-col-RequestStatus").shouldHave(Condition.text("Оформлена"));
@@ -71,15 +74,5 @@ public class ColaCanUploadAuto
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
         shippingRequest.deleteRequest(containerCola.getRequestName());
-
     }
-    /*@Test(dependsOnMethods={"checkGrid"})
-        public void chekOnManage(){
-            $(By.linkText(containerCola.getRequestName())).click();
-        switchTo().defaultContent();
-        sleep(10000);
-        switchTo().frame("ShippingRequestManage_IFrame");
-        System.out.println($(By.name("MainContent_ctlContent_cmbRequestService")).getText());
-        }*/
-
 }

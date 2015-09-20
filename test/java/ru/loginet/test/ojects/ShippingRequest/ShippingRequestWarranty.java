@@ -13,13 +13,15 @@ public class ShippingRequestWarranty extends Selenide {
 
     public static void distribute(){
         switchTo().defaultContent();
+        $(By.className("x-mask-loading")).waitWhile(Condition.present, 45000);
         switchTo().frame("ShippingRequestWarranty_IFrame");
-        btnDistribute.waitUntil(Condition.not(Condition.visible), 30000);
+        btnDistribute.waitUntil(Condition.not(Condition.visible), 50000);
         btnDistribute.click();
         btnConfirmYes.click();
         switchTo().defaultContent();
-        ShippingRequest.I_FRAME.waitUntil(Condition.not(Condition.visible),30000);
-        $(By.id("MainContent_ctlContent_frmRequestsList")).waitUntil(Condition.not(Condition.visible), 30000);
+        $(By.id("BaseMainContent_MainTabPanel__ShippingRequestWarranty")).waitWhile(Condition.present, 30000);
+        //ShippingRequest.I_FRAME.waitUntil(Condition.not(Condition.visible),30000);
+        //$(By.id("MainContent_ctlContent_frmRequestsList")).waitUntil(Condition.not(Condition.visible), 30000);
     }
 }
 

@@ -1,7 +1,7 @@
 package ru.loginet.test.Test.sandBox;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import ru.loginet.test.ojects.Dater;
 import ru.loginet.test.ojects.LoginPage;
 import ru.loginet.test.ojects.ShippingRequestAssigned.FilterShippingRequestAssigned;
 import ru.loginet.test.ojects.ShippingRequestAssigned.ShippingRequestAssigned;
@@ -17,8 +17,8 @@ public class Transporter {
     String userName = "tek20121";
     String requestName = "141609";
     FilterShippingRequestAssigned filterShippingRequestAssigned = new FilterShippingRequestAssigned();
+    ShippingRequestAssigned shippingRequestAssigned = new ShippingRequestAssigned();
     @Test
-
     public void openShippingRequestAssigned()
     {
         new LoginPage(userName);
@@ -27,8 +27,12 @@ public class Transporter {
     }
     @Test(dependsOnMethods = { "openShippingRequestAssigned" })
     public void findRequest (){
-        filterShippingRequestAssigned.findLinkByRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker")).setSelected(true);
-
+        //filterShippingRequestAssigned.findLinkByRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker")).setSelected(true);
+        shippingRequestAssigned.filter.reset();
+        shippingRequestAssigned.btnFilter.click();
+        shippingRequestAssigned.filter.setSender("ККЭБСЕ");
+        shippingRequestAssigned.filter.setDateLoad(Dater.getTomorrow());
+        shippingRequestAssigned.filter.apply();
     }
     @Test(dependsOnMethods = { "findRequest" })
     public void userCanAssignRequest(){

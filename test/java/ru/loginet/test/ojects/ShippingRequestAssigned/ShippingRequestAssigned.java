@@ -20,7 +20,12 @@ public class ShippingRequestAssigned extends Selenide{
     //public static final SelenideElement btnCreateBill = $(By.id("MainContent_ctlContent_btnCreateBill"));
 
     public static final SelenideElement btnAcceptanceAccept = $(By.id("MainContent_ctlContent_btnAccept"));
+    public FilterShippingRequestAssigned filter;
 
+    public ShippingRequestAssigned() {
+        filter = new FilterShippingRequestAssigned();
+
+    }
     public static void select()
     {
         if(I_FRAME.is(Condition.visible))
@@ -30,5 +35,13 @@ public class ShippingRequestAssigned extends Selenide{
             switchTo().defaultContent();
             switchTo().frame(I_FRAME);
         }
+    }
+
+    public void showDistributedFrom(String customer, String state) {
+        filter.reset();
+        btnFilter.click();
+        filter.setState(state);
+        filter.setSender(customer);
+
     }
 }

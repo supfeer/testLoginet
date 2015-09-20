@@ -6,12 +6,13 @@ import org.openqa.selenium.By;
 import ru.loginet.test.ojects.FilterRequest;
 
 public class FilterShippingRequestAssigned extends FilterRequest{
+    SelenideElement sender;
     public FilterShippingRequestAssigned(){
         prefix = "MainContent_ctlContent_ctl44_";
         txtRequestName =    $(By.id(idBuilder("txtRequestName")));
 
-        dtpDateFrom =       $(By.id(idBuilder("dtpDateFrom")));
-        dtpDateTo =         $(By.id(idBuilder("dtpDateTo")));
+        dtpDateFrom = $(By.id(idBuilder("dtpLoadDateFrom")));
+        dtpDateTo = $(By.id(idBuilder("dtpLoadDateTo")));
 
         txtSTO =            $(By.id(idBuilder("txtSTO")));
         txtOD =             $(By.id(idBuilder("txtOD")));
@@ -19,6 +20,8 @@ public class FilterShippingRequestAssigned extends FilterRequest{
         txtPO =             $(By.id(idBuilder("txtPO")));
 
         cmbStatus =         $(By.id(idBuilder("cmbStatus")));
+
+        sender = $(By.id(idBuilder("sbsSender")));
 
         btnFilterApply =    $(By.id(idBuilder("btnFilterApply")));
         btnFilterReset =    $(By.id(idBuilder("btnFilterReset")));
@@ -43,4 +46,12 @@ public class FilterShippingRequestAssigned extends FilterRequest{
         }
         return $(By.linkText(requestName));
     }
+
+    public void setSender(String customer) {
+        sender.click();
+        sender.setValue(customer);
+        sleep(1000);
+        sender.pressEnter();
+    }
+
 }

@@ -45,11 +45,15 @@ public class ShippingRequestDistribute extends Selenide {
     public void distiributeRequestOnPartner (String partner){
         select();
         findPartner(partner);
-        //Выберем первый чекбокс внизу
+        //Выберем первый чекбокс если у партнера только одно контактное лицо, то чекбокс устанавливается сам
         sleep(3000);
-        $(By.id("MainContent_ctlContent_gplContactPersons")).$(By.className("x-grid3-scroller")).$(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker")).setSelected(true);
+        if (!$(By.id("MainContent_ctlContent_gplContactPersons")).$(By.className("x-grid3-scroller")).$(By.className("x-grid3-row-first")).is(Condition.hasClass("x-grid3-row-selected"))) {
+            $(By.id("MainContent_ctlContent_gplContactPersons")).$(By.className("x-grid3-scroller")).$(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker")).setSelected(true);
+        }
         btnDistribute.click();
         switchTo().defaultContent();
+        $(By.id("BaseMainContent_MainTabPanel__ShippingRequestDistribute")).waitWhile(Condition.present, 30000);
+        sleep(3000);
         switchTo().frame(ShippingRequest.I_FRAME);
     }
 }
