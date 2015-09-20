@@ -27,7 +27,7 @@ public class Transporter {
     }
     @Test(dependsOnMethods = { "openShippingRequestAssigned" })
     public void findRequest (){
-        //filterShippingRequestAssigned.findLinkByRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker")).setSelected(true);
+        //filterShippingRequestAssigned.setRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker")).setSelected(true);
         shippingRequestAssigned.filter.reset();
         shippingRequestAssigned.btnFilter.click();
         shippingRequestAssigned.filter.setSender("ККЭБСЕ");
@@ -36,8 +36,8 @@ public class Transporter {
     }
     @Test(dependsOnMethods = { "findRequest" })
     public void userCanAssignRequest(){
-        ShippingRequestAssigned.btnStartAccept.click();
-        ShippingRequestAssigned.btnAcceptanceAccept.click();
+        shippingRequestAssigned.btnStartAccept.click();
+        shippingRequestAssigned.btnAcceptanceAccept.click();
         sleep(5000);
     }
 }

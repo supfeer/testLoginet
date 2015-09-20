@@ -22,6 +22,7 @@ public class SideMenu extends Selenide{
 
     public static void openShRqwst(){
         switchTo().defaultContent();
+        //Если вкладка есть, мы ее закроем
         if ($(By.id("BaseMainContent_MainTabPanel__ShippingRequestList")).$(By.className("x-tab-strip-close")).is(Condition.present))
             $(By.id("BaseMainContent_MainTabPanel__ShippingRequestList")).$(By.className("x-tab-strip-close")).click();
         if (transBrkr.is(Condition.present)) {

@@ -5,8 +5,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import java.util.ArrayList;
-
 
 public class ShippingRequest extends Selenide {
     //I_FRAME
@@ -89,22 +87,16 @@ public class ShippingRequest extends Selenide {
         switchTo().defaultContent();
         switchTo().frame(I_FRAME);
     }
-    public ArrayList<SelenideElement> getWholeGrid(){
-        return new ArrayList<SelenideElement>($$(By.className("x-grid3-row")));
-    }
+
     public SelenideElement getFirstChkrOnGrid(){
         return $(By.className("x-grid3-row-first")).$(By.className("x-grid3-row-checker"));
     }
-    public SelenideElement chkrOfRequest(String requestName){
-        return filter.findLinkByRequestName(requestName).parent().parent().parent().$(By.className("x-grid3-col-checker"));
-    }
-
-
 
     //Filter
     public void openFilter() {
         btnFilter.click();
     }
+
     public void filterReset(){
         btnFilter.click();
         filter.reset();
