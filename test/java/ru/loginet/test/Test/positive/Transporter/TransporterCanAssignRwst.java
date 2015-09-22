@@ -41,14 +41,15 @@ public class TransporterCanAssignRwst {
         } else {
             shippingRequestAssigned.btnStartAccept.click();
             shippingRequestAssigned.txtPriceForTheRequest.shouldBe(Condition.disabled);
+            shippingRequestAssigned.assignatorComparePrices();
             shippingRequestAssigned.btnAcceptanceAccept.click();
             shippingRequestAssigned.filterFindByName(rwstName);
             System.out.println(shippingRequestAssigned.$(By.linkText(rwstName))
                     .parent().parent().parent().$(By.className("x-grid3-col-17")).getText());
+            //Сравнивает ставки и если они не совпадают происходит айайай
             if (!Pricer.compare(shippingRequestAssigned.$(By.linkText(rwstName))
                     .parent().parent().parent().$(By.className("x-grid3-col-17")).getText()))
                 System.out.println("Boooooooooooooom");
-            //sleep(5000);
         }
     }
 

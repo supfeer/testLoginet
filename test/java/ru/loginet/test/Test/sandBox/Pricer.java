@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
 public class Pricer {
     @Test
     public void test() {
-        String column = "13000,00 RUR / 0,00 RUR";
+        String column = "33250,00 RUR без НДС";
         column = column.trim();
         String priceOrg;
         String priceTr;
-        String[] str = column.split("/");
+        String[] str = column.split(",");
         priceOrg = str[0].trim();
         priceTr = str[1].trim();
 
@@ -20,4 +20,5 @@ public class Pricer {
         System.out.println(priceTr);
 
     }
+
 }

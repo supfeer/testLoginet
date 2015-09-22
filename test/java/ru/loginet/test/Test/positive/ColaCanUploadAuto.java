@@ -12,7 +12,7 @@ import ru.loginet.test.ojects.SideMenu;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class ColaCanUploadAuto
@@ -73,13 +73,14 @@ public class ColaCanUploadAuto
         shippingRequest.deleteRequest(containerCola.getRequestName());
 
     }
-    /*@Test(dependsOnMethods={"checkGrid"})
+
+    @Test(dependsOnMethods = {"checkGrid"})
         public void chekOnManage(){
             $(By.linkText(containerCola.getRequestName())).click();
         switchTo().defaultContent();
         sleep(10000);
         switchTo().frame("ShippingRequestManage_IFrame");
         System.out.println($(By.name("MainContent_ctlContent_cmbRequestService")).getText());
-        }*/
+    }
 
 }

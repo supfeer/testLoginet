@@ -10,4 +10,9 @@ public class Pricer {
         String priceTr = str[1].trim();
         return priceOrg.equals(priceTr);
     }
+
+    public static String normalize(String unnormalPrice) {
+        String[] str = unnormalPrice.split(",");
+        return str[0];
+    }
 }

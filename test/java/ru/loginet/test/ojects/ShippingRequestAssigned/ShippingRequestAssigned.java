@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import ru.loginet.test.ojects.Pricer;
 
 /**
  * Created by supfe_000 on 16.09.2015.
@@ -25,8 +26,8 @@ public class ShippingRequestAssigned extends Selenide{
     public final SelenideElement firstCheker = $(By.className("x-grid3-row-checker"));
     //Assignator
     public final SelenideElement btnAcceptanceAccept = $(By.id("MainContent_ctlContent_btnAccept"));
+    public final SelenideElement lblPriceInfo = $(By.id("MainContent_ctlContent_lblPriceInfo"));
     public final SelenideElement txtPriceForTheRequest = $(By.id("MainContent_ctlContent_txtPriceForTheRequest"));
-
     //constuctor
     public ShippingRequestAssigned() {
         filter = new FilterShippingRequestAssigned();
@@ -36,6 +37,21 @@ public class ShippingRequestAssigned extends Selenide{
     {
         switchTo().defaultContent();
         switchTo().frame(I_FRAME);
+    }
+
+    //Assignator
+    public boolean assignatorComparePrices() {
+        String prsOrg = lblPriceInfo.getText();
+        String prsTr = executeJavaScript("return document.getElementById('MainContent_ctlContent_txtPriceForTheRequest').value");
+        prsOrg = Pricer.normalize(prsOrg);
+        System.out.println("PrcOrg - " + prsOrg);
+        System.out.println("PrcTr - " + prsTr);
+        if (prsOrg.equals(prsTr)) {
+            return true;
+        } else {
+            $(By.id("PriceNOTequals")).click();
+            return false;
+        }
     }
 
     //xgrig
@@ -73,4 +89,5 @@ public class ShippingRequestAssigned extends Selenide{
         filter.apply();
         $(By.linkText(requestName)).shouldBe(Condition.present);
     }
+
 }

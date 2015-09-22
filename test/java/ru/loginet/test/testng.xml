@@ -6,10 +6,11 @@
     <test name="Test">
         <classes>
             <class name="ru.loginet.test.Test.positive.ColaCanLogin" />
-
             <class name="ru.loginet.test.Test.positive.ColaCanUploadAuto" />
             <class name="ru.loginet.test.Test.positive.UserCanDistributeRequestByWarr" />
             <class name="ru.loginet.test.Test.positive.ColaCanDistributeRequest" />
+            <class name="ru.loginet.test.Test.positive.Transporter.TransporterCanAssignRwst"/>
+
         </classes>
     </test>
 

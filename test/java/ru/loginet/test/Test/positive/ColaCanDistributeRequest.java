@@ -20,7 +20,7 @@ public class ColaCanDistributeRequest {
     ShippingRequest shippingRequest = new ShippingRequest(customer);
     String requestName = "";
     ShippingRequestDistribute requestDistribute = new ShippingRequestDistribute();
-    String partner = "ООО \"Алые Паруса\"";
+    String partner = "ООО\"СТЭФ\"";
 
     //"РегионТрансАвто";
     //
