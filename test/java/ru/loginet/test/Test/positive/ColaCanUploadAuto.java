@@ -81,6 +81,8 @@ public class ColaCanUploadAuto
         sleep(10000);
         switchTo().frame("ShippingRequestManage_IFrame");
         System.out.println($(By.name("MainContent_ctlContent_cmbRequestService")).getText());
+        if (!executeJavaScript("return document.getElementById('MainContent_ctlContent_cmbRequestService').value").equals(containerCola.getRequestService()))
+            $(By.id("RequestServiceweer")).click();
     }
 
 }

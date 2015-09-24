@@ -34,8 +34,13 @@ public class ColaCanDistributeRequest {
         sleep(2000);
         shippingRequest.getFirstChkrOnGrid().setSelected(true);
         requestName = shippingRequest.getRequestNameSelectedRequest();
+
+        shippingRequest.btnDistributeMenu.shouldBe(Condition.enabled);
         shippingRequest.btnDistributeMenu.click();
+
+        shippingRequest.mniDistribute.shouldBe(Condition.enabled);
         shippingRequest.mniDistribute.click();
+
         requestDistribute.distiributeRequestOnPartner(partner);
         shippingRequest.filterFindByName(requestName);
         $(By.linkText(requestName)).parent().parent().parent().
