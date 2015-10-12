@@ -19,12 +19,15 @@ public class FilterShippingRequestAssigned extends FilterRequest{
         txtPO =             $(By.id(idBuilder("txtPO")));
 
         cmbStatus =         $(By.id(idBuilder("cmbStatus")));
+        cmbService = $(By.id(idBuilder("cmbService")));
+
 
         sender = $(By.id(idBuilder("sbsSender")));
 
         btnFilterApply =    $(By.id(idBuilder("btnFilterApply")));
         btnFilterReset =    $(By.id(idBuilder("btnFilterReset")));
         btnFilterCancel =   $(By.id(idBuilder("btnFilterCancel")));
+
     }
 
     /*@Override
@@ -56,7 +59,7 @@ public class FilterShippingRequestAssigned extends FilterRequest{
     @Override
     public void setState(String state) {
         cmbStatus.click();
-        for (SelenideElement el : $$(By.className("x-combo-list"))) {
+        for (SelenideElement el : $$(By.className("lstState"))) {
             for (SelenideElement el1 : el.$$(By.className("x-mcombo-text"))) {
                 if (el1.getText().contains(state))
                     el1.parent().setSelected(true);

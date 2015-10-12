@@ -4,10 +4,11 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import ru.loginet.test.ojects.LoginPage;
-import ru.loginet.test.ojects.Pricer;
 import ru.loginet.test.ojects.ShippingRequestAssigned.ShippingRequestAssigned;
 import ru.loginet.test.ojects.SideMenu;
+import ru.loginet.test.ojects.tools.Pricer;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 
 /**
@@ -32,11 +33,11 @@ public class TransporterCanAssignRwst {
         shippingRequestAssigned.filter.setState(state);
         shippingRequestAssigned.filter.apply();
         shippingRequestAssigned.firstRow("x-grid3-row-checker").setSelected(true);
-        price = shippingRequestAssigned.firstRow("x-grid3-col-17").getText();
+        price = shippingRequestAssigned.firstRow("x-grid3-col-Prices").getText();
 
         rwstName = shippingRequestAssigned.getRequestNameSelectedRequest();
 
-        if (shippingRequestAssigned.firstRow("x-grid3-col-11").getText().contains("Оплата согласно договора перевозки грузов")) {
+        if (shippingRequestAssigned.firstRow("x-grid3-col-Prices").getText().contains("Оплата согласно договора перевозки грузов")) {
             System.out.println("Booom!!!");
         } else {
             shippingRequestAssigned.btnStartAccept.click();
@@ -44,12 +45,14 @@ public class TransporterCanAssignRwst {
             shippingRequestAssigned.assignatorComparePrices();
             shippingRequestAssigned.btnAcceptanceAccept.click();
             shippingRequestAssigned.filterFindByName(rwstName);
-            System.out.println(shippingRequestAssigned.$(By.linkText(rwstName))
-                    .parent().parent().parent().$(By.className("x-grid3-col-17")).getText());
+            System.out.println($(By.linkText(rwstName))
+                    .parent().parent().parent().$(By.className("x-grid3-col-Prices")).getText());
             //Сравнивает ставки и если они не совпадают происходит айайай
-            if (!Pricer.compare(shippingRequestAssigned.$(By.linkText(rwstName))
-                    .parent().parent().parent().$(By.className("x-grid3-col-17")).getText()))
+            if (!Pricer.compare($(By.linkText(rwstName))
+                    .parent().parent().parent().$(By.className("x-grid3-col-Prices")).getText())) {
                 System.out.println("Boooooooooooooom");
+                $(By.className("Prices not equals"));
+            }
         }
     }
 

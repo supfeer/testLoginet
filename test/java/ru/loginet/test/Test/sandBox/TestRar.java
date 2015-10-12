@@ -18,7 +18,7 @@ public class TestRar {
     public void test() throws Exception {
         String code = "3802013234";
         String value;
-        InputStream in = new FileInputStream("src/test/testFiles/ColaValid1.xls");
+        InputStream in = new FileInputStream("src/test/testFiles/ColaAuto.xls");
         HSSFWorkbook wb = new HSSFWorkbook(in);
 
         Sheet sheet = wb.getSheetAt(1);

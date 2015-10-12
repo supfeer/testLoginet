@@ -36,7 +36,7 @@ public class SqlTool {
                 //rs = null;
                 String sql = "UPDATE dbo.ShippingRequest\n" +
                         "SET DeleteDate = SYSDATETIME ()\n" +
-                        "WHERE Name LIKE N'" + requestName + "';";
+                        "WHERE OuterName LIKE N'" + requestName + "';";
                 int i = stmt.executeUpdate(sql);
                 stmt.close();
             }

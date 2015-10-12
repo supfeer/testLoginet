@@ -1,11 +1,11 @@
 package ru.loginet.test.Test.sandBox;
 
 import org.testng.annotations.Test;
-import ru.loginet.test.ojects.Dater;
 import ru.loginet.test.ojects.LoginPage;
 import ru.loginet.test.ojects.ShippingRequestAssigned.FilterShippingRequestAssigned;
 import ru.loginet.test.ojects.ShippingRequestAssigned.ShippingRequestAssigned;
 import ru.loginet.test.ojects.SideMenu;
+import ru.loginet.test.ojects.tools.Dater;
 
 import static com.codeborne.selenide.Selenide.sleep;
 

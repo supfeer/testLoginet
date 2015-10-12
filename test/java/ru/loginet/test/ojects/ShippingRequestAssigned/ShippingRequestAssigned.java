@@ -4,7 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import ru.loginet.test.ojects.Pricer;
+import ru.loginet.test.ojects.tools.Pricer;
 
 /**
  * Created by supfe_000 on 16.09.2015.
@@ -15,7 +15,7 @@ public class ShippingRequestAssigned extends Selenide{
     public static final SelenideElement btnStartCancel = $(By.id("MainContent_ctlContent_btnCancel"));
 
     public static final SelenideElement btnInsure = $(By.id("MainContent_ctlContent_btnInsure"));
-    public static final SelenideElement btnProcess = $(By.id("MainContent_ctlContent_btnProcess"));
+    public final SelenideElement btnProcess = $(By.id("MainContent_ctlContent_btnProcess"));
     public final SelenideElement btnFilter = $(By.id("MainContent_ctlContent_btnFilter"));
     public static final SelenideElement mnuReports = $(By.id("MainContent_ctlContent_btnReports"));
     //public static final SelenideElement btnCreateBill = $(By.id("MainContent_ctlContent_btnCreateBill"));
@@ -39,6 +39,10 @@ public class ShippingRequestAssigned extends Selenide{
         switchTo().frame(I_FRAME);
     }
 
+    //lists
+    public void clickOnValue(String value) {
+        $$(By.className("expandedListCfg")).findBy(Condition.text(value)).click();
+    }
     //Assignator
     public boolean assignatorComparePrices() {
         String prsOrg = lblPriceInfo.getText();
@@ -60,7 +64,7 @@ public class ShippingRequestAssigned extends Selenide{
     }
 
     public String getRequestNameSelectedRequest() {
-        return $(By.className("x-grid3-row-selected")).$(By.className("x-grid3-td-1")).getText();
+        return $(By.className("x-grid3-row-selected")).$(By.className("x-grid3-col-RequestName")).getText();
     }
 
     //filter

@@ -5,7 +5,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import ru.loginet.test.ojects.Dater;
+import ru.loginet.test.ojects.tools.Dater;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

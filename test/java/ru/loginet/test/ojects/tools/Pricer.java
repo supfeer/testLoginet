@@ -1,4 +1,4 @@
-package ru.loginet.test.ojects;
+package ru.loginet.test.ojects.tools;
 
 /**
  * Created by supfe_000 on 20.09.2015.

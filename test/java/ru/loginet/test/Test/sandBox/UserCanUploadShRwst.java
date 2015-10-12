@@ -3,10 +3,10 @@ package ru.loginet.test.Test.sandBox;
 
 import org.testng.annotations.Test;
 import ru.loginet.test.cola.ParserShippingRequestCola;
-import ru.loginet.test.ojects.Dater;
 import ru.loginet.test.ojects.LoginPage;
 import ru.loginet.test.ojects.ShippingRequest.ShippingRequest;
 import ru.loginet.test.ojects.SideMenu;
+import ru.loginet.test.ojects.tools.Dater;
 
 /**
  * Created by supfe_000 on 18.09.2015.

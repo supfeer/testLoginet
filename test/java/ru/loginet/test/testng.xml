@@ -13,5 +13,11 @@
 
         </classes>
     </test>
+    <test name="Transporter">
+        <classes>
+            <class name="ru.loginet.test.Test.positive.Transporter.TransporterCanAssignRwst"/>
+
+        </classes>
+    </test>
 
 </suite>

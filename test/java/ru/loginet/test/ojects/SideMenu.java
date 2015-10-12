@@ -36,12 +36,18 @@ public class SideMenu extends Selenide{
     }
     public static void openShRqwstAssigned(){
         switchTo().defaultContent();
+        //Если вкладка есть, мы ее закроем
+        if ($(By.id("BaseMainContent_MainTabPanel__ShippingRequestAssigned")).$(By.className("x-tab-strip-close")).is(Condition.present))
+            $(By.id("BaseMainContent_MainTabPanel__ShippingRequestAssigned")).$(By.className("x-tab-strip-close")).click();
+
         if (transBrkr.is(Condition.present)) {
             transBrkr.click();
         }
         shippingRqwstAssigned.click();
         ShippingRequestAssigned.select();
         $(By.className("x-grid3-hd-checker-on")).waitUntil(Condition.not(Condition.present), 30000);
+        $(By.className("x-mask-loading")).waitWhile((Condition.present), 30000);
+        //sleep(7000);
     }
 
 }

@@ -145,4 +145,15 @@ public class ShippingRequest extends Selenide {
         //btnDeleteYes.click();
         countOfRow.shouldHave(Condition.text("Нет данных для отображения"));
     }
+
+    public String getNameFromComment(String comment) {
+        String str = "";
+        for (SelenideElement element : $$(By.className("x-grid3-row"))) {
+            if (element.$(By.className("x-grid3-col-Comment")).getText().equals(comment)) {
+                str = element.$(By.className("x-grid3-td-RequestName")).getText();
+                break;
+            }
+        }
+        return str;
+    }
 }

@@ -5,13 +5,12 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import ru.loginet.test.cola.ParserShippingRequestCola;
 import ru.loginet.test.cola.ShippingRequestValueContainerCola;
-import ru.loginet.test.ojects.Dater;
+import ru.loginet.test.ojects.LoginPage;
 import ru.loginet.test.ojects.ShippingRequest.ShippingRequest;
 import ru.loginet.test.ojects.SideMenu;
+import ru.loginet.test.ojects.tools.Dater;
 
 import java.io.File;
-
-import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Created by supfe_000 on 20.09.2015.
@@ -26,12 +25,13 @@ public class ColaCanUploadAutoToday {
 
     @Test
     public void ColaCanUploadIntercityShippingRequest() throws Exception {
-
+        new LoginPage("test_cola");
 
         SideMenu.openShRqwst();
         try {
             ParserShippingRequestCola.setOd();
             ParserShippingRequestCola.setDateLoad(Dater.getToday());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class ColaCanUploadAutoToday {
         shippingRequest.filter.apply();
         shippingRequest.countOfRow.shouldHave(Condition.text("Отображаются записи с 1 по 1, всего 1"));
         shippingRequest.firstRow.$(By.className("x-grid3-col-OD")).shouldHave(Condition.text(containerCola.getOD()));
-        containerCola.setRequestName($(By.className("x-grid3-col-RequestName")).getText());
+        containerCola.setRequestName(shippingRequest.getNameFromComment(containerCola.getComment()));
     }
 
     @Test(dependsOnMethods = {"findRequest"})
@@ -73,6 +73,6 @@ public class ColaCanUploadAutoToday {
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
-        shippingRequest.deleteRequest(containerCola.getRequestName());
+        //shippingRequest.deleteRequest(containerCola.getRequestName());
     }
 }

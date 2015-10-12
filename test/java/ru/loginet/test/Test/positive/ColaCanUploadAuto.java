@@ -6,9 +6,11 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import ru.loginet.test.cola.ParserShippingRequestCola;
 import ru.loginet.test.cola.ShippingRequestValueContainerCola;
-import ru.loginet.test.ojects.Dater;
+import ru.loginet.test.ojects.LoginPage;
 import ru.loginet.test.ojects.ShippingRequest.ShippingRequest;
 import ru.loginet.test.ojects.SideMenu;
+import ru.loginet.test.ojects.tools.Dater;
+import ru.loginet.test.ojects.tools.Js;
 
 import java.io.File;
 
@@ -26,7 +28,7 @@ public class ColaCanUploadAuto
 
     @Test
     public void ColaCanUploadIntercityShippingRequest() throws Exception {
-
+        new LoginPage("test_cola");
         SideMenu.openShRqwst();
         try {
             ParserShippingRequestCola.setOd();
@@ -70,7 +72,7 @@ public class ColaCanUploadAuto
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
         shippingRequest.firstRow("x-grid3-col-LoadStoreCode").shouldHave(Condition.text(containerCola.getLoadStoreCode()));
-        shippingRequest.deleteRequest(containerCola.getRequestName());
+        //shippingRequest.deleteRequest(containerCola.getRequestName());
 
     }
 
@@ -78,11 +80,22 @@ public class ColaCanUploadAuto
         public void chekOnManage(){
             $(By.linkText(containerCola.getRequestName())).click();
         switchTo().defaultContent();
-        sleep(10000);
+        sleep(5000);
         switchTo().frame("ShippingRequestManage_IFrame");
-        System.out.println($(By.name("MainContent_ctlContent_cmbRequestService")).getText());
-        if (!executeJavaScript("return document.getElementById('MainContent_ctlContent_cmbRequestService').value").equals(containerCola.getRequestService()))
-            $(By.id("RequestServiceweer")).click();
+        $(By.id("MainContent_ctlContent_lblOrganizer")).should(Condition.have(Condition.text("ККЭБСЕ")));
+        Js.compare("MainContent_ctlContent_txtOuterName", containerCola.getRequestName());
+        Js.compare("MainContent_ctlContent_cmbSender", "ККЭБСЕ");
+        Js.compare("MainContent_ctlContent_cmbRequestService", containerCola.getRequestService());
+        //Js.compare("MainContent_ctlContent_txtReceiver",containerCola.getAdressUnload()); здесь фирма грузополучатель
+        Js.compare("MainContent_ctlContent_cmbShippingType", "Автомобильная");
+        Js.compare("MainContent_ctlContent_cmbOwner", "ККЭБСЕ");
+        Js.compare("MainContent_ctlContent_cmbVehicleTonnage", "Любая");
+        Js.compare("MainContent_ctlContent_cmbVehicleVolume", containerCola.getBodySpace());
+        Js.compare("MainContent_ctlContent_txtDesiredPrice", "33250");
+        Js.compare("MainContent_ctlContent_cmbCurrency", "Российский рубль");
+        Js.compare("MainContent_ctlContent_txtCargoCost", containerCola.getRequestTotalCargoCost());
+        Js.compare("MainContent_ctlContent_cmbRegion", containerCola.getRegion());
+        Js.compare("MainContent_ctlContent_cmbCircleRoute", containerCola.getTripTypes());
     }
 
 }
